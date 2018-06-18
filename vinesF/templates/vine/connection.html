@@ -1,0 +1,30 @@
+<html>
+<head><title>Login|Vines</title></head>
+
+<body>
+  
+{% if user.is_authenticated %}
+        <h1>You are connected.</h1>
+        <p>
+        Your email : {{ user.email }}
+            
+        </p>
+	
+{% else %}	
+	
+        <form method="post" action="{{ public_connection }}" >
+        {% csrf_token %}
+              <!-- This line inserts a CSRF token. -->
+        <table>
+            {{ form.as_table }}
+         <!-- This line displays lines of the form.-->
+        </table>
+        <p><input type="submit" class="button" value="login" /></p>
+
+        </form>
+{% endif %}
+{% if user.is_authenticated %}
+<span> <a href="Logout">logout </a></span>
+{% endif %}
+</body>
+</html>

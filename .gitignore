@@ -1,0 +1,45 @@
+#Project files and directories
+/local_settings.py
+#/src/static/
+/tmp/
+/media/
+/utils/
+/vinesF/credential.txt
+/vinesF/static/node_modules/*
+/vinesF/static/bootstrap/
+/vinesF/static/lib/jquery
+/vinesF/static/lib/waypoints
+
+/vinesF/web/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+# C extensions
+*.so
+# PyInstaller
+*.manifest
+*.spec
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+# Translations
+*.pot
+# Django stuff:
+*.log
+# Sphinx documentation
+docs/_build/
+# PyBuilder
+target/
+
+#local db
+*.sqlite3

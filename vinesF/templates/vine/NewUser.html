@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title_html %}
+    vine|newuser
+{% endblock %}
+{% block article_content %}
+{% load static %} 
+
+<html>
+
+
+<body>
+<div class="container">
+<form method="post" action="{% url "newuser" %}" >
+    {% csrf_token %}
+<!-- This line inserts a CSRF token. -->
+    <table>
+        {{ form.as_table }}
+<!-- This line displays lines of the form.-->
+    </table>
+<p><input type="submit" value="Create" /></p>
+
+</form>
+</div>
+
+</body>
+{% endblock %}
+</html>

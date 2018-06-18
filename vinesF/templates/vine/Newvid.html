@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title_html %}
+vine|new vine
+{% endblock %}
+{% block h1 %}
+Add New Video
+{% endblock %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+
+
+
+{% block article_content %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+<hr>	
+<div class="container">
+<form method="post" action="{% url "newvid" %}" enctype="multipart/form-data">
+    {% csrf_token %}
+<!-- This line inserts a CSRF token. -->
+    <table>
+        {{ form.as_table }}
+<!-- This line displays lines of the form.-->
+    </table>
+<p><button type="submit"/>upload</p>
+
+</form>
+</div>
+
+{% endblock %}
+<footer>
+	
+</footer>
+<!-- HTML VERSION WITH NO BASE EXTENSION -->
+<!-- <html>
+	<head><title>  New Vid </title> </head>
+	<body>
+			<form method="post" action="{% url 'NewVid' %}" >
+{% csrf_token %}
+<!-- This line inserts a CSRF token. -->
+<!-- <table>
+    {{ form.as_table }}
+<!-- This line displays lines of the form.-->
+<!-- </table>
+<p><input type="submit" value="Create" /></p>
+</form>
+
+	</body>
+<html>

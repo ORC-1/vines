@@ -1,0 +1,57 @@
+
+{% load static %}
+<html>
+<head> <title> Latest Video </title></head>
+<body>
+<h3> {{ action }} </h3>
+
+    {% if VidNames|length > 0 %}
+	
+	<table>
+	<thead>
+	<tr>
+	    <td> ID </td>
+		<td> Title </td>
+		<td> Date </td>
+		<td> Path </td>
+		
+	</tr>
+	</thead>
+	<tbody>
+    {% for video in VidNames %}
+	      <tr> 
+		      <td> {{ video.IdNo }} </td>
+			  <td> {{ video.primaryName }} </td>
+			  <td> {{ video.Date }} </td>
+			  <td> {{ video.AddPath }} </td>
+		   </tr>
+	
+	{% endfor %}
+	</tbody>
+	
+	</table>
+	
+    {% else %}
+	
+	<span> <h3> No Project </h3> </span>
+	
+	
+	
+    {% endif %}
+    
+]
+    
+     {{ vix }}
+	     
+            
+   
+	   
+	
+	
+
+
+
+
+
+</body>
+</html>

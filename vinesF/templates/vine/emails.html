@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title_html %}
+vine|Subscribe
+{% endblock %}
+{% block h1 %}
+Add New Video
+{% endblock %}
+
+
+
+
+{% block article_content %}
+<hr>	
+<div class="container">
+	                <h2>Newsletter</h2>
+                
+                <p>Subscribe now and get free funny videos daily.</p>
+<form method="POST" action="{% url "emails" %}" >
+    {% csrf_token %}
+<!-- This line inserts a CSRF token. -->
+    <table>
+        {{ form.as_p }}
+<!-- This line displays lines of the form.-->
+    </table>
+<p><button type="submit"/>subscribe</p>
+
+</form>
+</div>
+<footer>
+	
+</footer>
+{% endblock %}

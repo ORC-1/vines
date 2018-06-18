@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% block title_html %}
+    vine
+{% endblock %}
+{% block article_content %}
+{% load static %} 
+{% load hitcount_tags %}
+{% load search_tags %}
+
+  <header>
+
+  <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- <img src="{% static 'images/bra_line.jpg' %}"> --> <!-- Fix branding -->
+
+        <div class="col-md-2">
+
+          <a href="#"><img src="{% static 'images/logo.png' %}" class="logo"></a>
+          
+          </a>
+        </div><br> <!--br tag for break between logo--> <!-- End Logo & Menu-Toggle -->
+
+        <div class="col-md-5">
+           <form type="get" action="." ><input placeholder="Type to search..." type="text" 
+            id="search_box" type="text" name="search_box" >
+            <button id="search_submit" type="submit" >search</button>
+
+          </form><br>
+         <!-- {% search primaryName Origin %} -->
+        </div><!-- End Search-Bar -->
+
+        <div class="col-md-5">
+          <ul id="user-info">
+            <li><a href="/emails" class="button" >free funny vine daily|Subscribe now
+            </a></li>                       
+          </ul> <!-- End Ul -->
+        </div> <!-- End User Information -->
+
+      </div> <!-- End Row -->
+    </div></div> <!-- End Container-Fluid -->
+  </header> <!-- End Header -->
+    
+<body>
+   <br>
+  <div class="container-fluid">
+    <div class="row">
+
+      <ul class="tab">
+        <li class="active">Most Watched</li>
+        <li>Afro</li>
+        <li>Others</li>
+      </ul></div> <!-- End Tabs --> <br>
+
+      <hr>
+
+
+      <div class="main-videos" >
+
+          {% for obj in hitz %}
+
+         <script type="text/javascript">
+
+                        var videos = document.querySelectorAll('video');
+                        for(var i=0; i<videos.length; i++)
+                           videos[i].addEventListener('play', function(){pauseAll(this)}, true);
+
+
+                        function pauseAll(elem){
+                          for(var i=0; i<videos.length; i++){
+                            //select to play?
+                            if(videos[i] == elem) continue;
+                            //is it played && is it already paused?
+                            if(videos[i].played.length > 0 && !videos[i].paused){
+                            // else pause it now
+                              videos[i].pause();
+                            }
+                          }
+                        }
+        </script>
+
+       <div class="col-md-4 sm-6"  >                                               
+           <div class="area">
+             <!-- End Vertical Align -->        
+              {% get_hit_count_js_variables for obj.Hitz as hitcount %}
+                    {% get_hit_count for obj.Hitz as total_hits %}
+                        <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                        // use the template tags in our JavaScript call
+                        $.postCSRF("{{ hitcount.ajax_url }}", { hitcountPK : "{{ hitcount.pk }}" })
+                        .done(function(data){$('<i />').text(data.hit_counted).attr('id','hit-counted-value').appendTo('#hit-counted');
+                        $('#hit-response').text(data.hit_message);
+                        }).fail(function(data){
+                        console.log('POST failed');
+                        console.log(data);
+                        });
+                        });
+                        </script> 
+              <video id="hit-video" class="video-js" width="400" height="300" controls preload="auto" data-setup="{}">
+                        <source src="{{ obj.Hitz.file_path.url}}" type="video/mp4"></source>
+                           <!--  <source src="{{ MEDIA_URL }}{{ video.path}}" type="video/ogg"> ##Not Working 24.5.2018-->
+                          
+                              <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+                         </video>
+                         
+          <h4>{{obj.Hitz.primaryName}}</h4>
+          <p><span><small>Uploaded at: {{ obj.Hitz.uploaded_at }}</small></span> {{ total_hits }} views</p>            
+        </div></div>
+        {% endfor %} <!-- End Col-md-4 -->
+
+            <!-- Mini_hit_video_section -->
+            <ul class="mini hidden-xs hidden-sm">
+              {% for obj in minihitz %}
+
+          <li class="col-md-2" >
+            
+
+            <div class="area">
+              
+
+                <div class="vertical-align">
+                  <!-- End Vertical Align -->
+
+              </div> <!-- End Mask / Hover -->
+         <script type="text/javascript">
+                        var videos = document.querySelectorAll('video');
+                        for(var i=0; i<videos.length; i++)
+                           videos[i].addEventListener('play', function(){pauseAll(this)}, true);
+
+
+                        function pauseAll(elem){
+                          for(var i=0; i<videos.length; i++){
+                            //select to play?
+                            if(videos[i] == elem) continue;
+                            //is it played && is it already paused?
+                            if(videos[i].played.length > 0 && !videos[i].paused){
+                            // else pause it now
+                              videos[i].pause();
+                            }
+                          }
+                        }
+        </script>
+        <video id="my-video" class="video-js" width="100" height="100" controls preload="metadata">
+                          <source src="{{ obj.mhit.file_path.url}}" type="video/mp4"></source>
+                          <p class="vjs-no-js">
+                          To view this video please enable JavaScript, and consider upgrading to a web browser that
+                          <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+        </video><p>{{obj.mhit.primaryName}}</p>
+                   
+              
+
+
+            </div> {% endfor %} <!-- End Area -->
+             <!-- End Most Watched Videos -->
+
+    </div> <!-- End Row -->
+  </div> <!-- End Container-Fluid -->
+        <!-- End Mini_hit_video_section -->
+
+  <hr>
+
+
+                  
+
+  <!-- Main video section -->
+  							<div class="container-fluid">         
+					      {% for obj in vine %}
+                <div class="row-justify-content-center">
+					      <div class="col-md-4">
+
+                
+
+                      <script type="text/javascript">
+                       
+                        var videos = document.querySelectorAll('video');
+                        for(var i=0; i<videos.length; i++)
+                           videos[i].addEventListener('play', function(){pauseAll(this)}, true);
+
+
+                        function pauseAll(elem){
+                          for(var i=0; i<videos.length; i++){
+                            //select to play?
+                            if(videos[i] == elem) continue;
+                            //is it played && is it already paused?
+                            if(videos[i].played.length > 0 && !videos[i].paused){
+                            // else pause it now
+                              videos[i].pause();
+                            }
+                          }
+                        }
+        </script>
+
+                    {% get_hit_count_js_variables for obj as hitcount %}
+                    {% get_hit_count for obj as total_hits %}
+                        <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                        // use the template tags in our JavaScript call
+                        $.postCSRF("{{ hitcount.ajax_url }}", { hitcountPK : "{{ hitcount.pk }}" })
+                        .done(function(data){$('<i />').text(data.hit_counted).attr('id','hit-counted-value').appendTo('#hit-counted');
+                        $('#hit-response').text(data.hit_message);
+                        }).fail(function(data){
+                        console.log('POST failed');
+                        console.log(data);
+                        });
+                        });
+                        </script>  
+                        
+					              <a href="{{ obj.file_path }}">{{ obj.name }}</a>
+
+						            <video  id="main-video" class="video-js" width="200" height="200" controls preload="metadata">
+                        <source src="{{ obj.file_path.url}}" type="video/mp4"></source>
+                        <p class="vjs-no-js">
+                          To view this video please enable JavaScript, and consider upgrading to a web browser that
+                          <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                       </video>
+                        
+
+                  <p class="views">label:{{ obj.primaryName }}| <strong>{{ total_hits }} views</strong></p>
+                 
+
+              
+               <div class="clear"> </div> 
+               
+              </div>
+					   </div>            
+ 
+					      {% endfor %} 
+
+
+                <!-- End MainVideoSection -->
+
+
+                  <!-- Pagination -->
+                {% if vine.has_other_pages %}
+                            <div class="text-center">
+                            <ul class="pagination">
+                              {% if vine.has_previous %}
+                                <li><a href="?page={{ vine.previous_page_number }}">&laquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                              {% endif %}
+                              {% for i in vine.paginator.page_range %}
+                                {% if vine.number == i %}
+                                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                              {% if vine.has_next %}
+                                <li><a href="?page={{ vine.next_page_number }}">&raquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                              {% endif %}
+                            </ul></div>
+            {% endif %}
+
+                      <!-- Pagination End -->
+
+              
+
+                
+
+  
+  <footer>
+
+       <!-- footer inherited from base -->
+       
+  </footer> <!-- End Footer -->
+   
+    
+
+  <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
+
+       
+{% endblock %}
+
+</html>

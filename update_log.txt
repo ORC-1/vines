@@ -1,0 +1,5 @@
+The following are features/bugs fixes needed:
+1.Fix faulty ipad display
+2.Complete scraping bot for video adding automation
+3.Fixing failing search return page
+4.Include social media plugin 

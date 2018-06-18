@@ -1,0 +1,17 @@
+<h1> {{video.primaryName}} </h1>
+<h1> {{video.Date}} </h1>
+
+<html>
+{% load static %}
+<head> <title> Latest </title> </head>
+<body>
+<h3>When Death Is On Vacation</h3>
+						<video width="200" height="200" controls>
+                        <source src="{% static 'vinef/Videos/{video.primaryName}.mp4'%}" type="video/mp4">
+                          <!-- <source src="{% static 'vinef/Videos/WhenDeathIsOnVacation.mp4'%}" type="video/ogg">-->
+                          Your browser does not support the video tag.
+                        </video>
+</body>
+
+
+</html>
