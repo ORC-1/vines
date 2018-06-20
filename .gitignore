@@ -9,6 +9,7 @@
 /vinesF/static/bootstrap/
 /vinesF/static/lib/jquery
 /vinesF/static/lib/waypoints
+/settings/
 
 /vinesF/web/
 # Byte-compiled / optimized / DLL files
@@ -43,3 +44,6 @@ target/
 
 #local db
 *.sqlite3
+
+#ignore sensitive enviroment data
+*.env
