@@ -15,8 +15,11 @@ Features
 How to Use
 
 Clone the project fom the following url https://github.com/ORC-1/vine.git
-Install all dependecies using requirements file eg pip install -r requirements.txt
-run the migrate command eg: python manage.py migrate
+Install all dependecies using requirements file 
+eg pip install -r requirements.txt
+Set the .env.example to .env and fill accordingly
+run the migrate command 
+eg: python manage.py migrate
 Creatersupeuser using the python manage.py createsuperuser command
 login
 go to newvid url to upload contents 
