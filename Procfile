@@ -1,0 +1,1 @@
+web: gunicorn vines.wsgi --log-file -
