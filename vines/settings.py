@@ -30,7 +30,7 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.2','127.0.0.1']
+ALLOWED_HOSTS = ['*.*']
 
 
 # Application definition
@@ -141,7 +141,7 @@ USE_TZ = True
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'vinesF/static'),
 # ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'vinesF/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Extra places for collectstatic to find static files.
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
